@@ -5,7 +5,7 @@
 ```bash
 cd yourbuilddir
 git clone https://github.com/M64GitHub/libtsprites.git
-git clone https://github.com/M64GitHub/tsdemo.git
+git clone https://github.com/M64GitHub/plasmaghost.git
 cd tsdemo
 make
 ```
