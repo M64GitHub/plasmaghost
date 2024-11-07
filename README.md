@@ -6,14 +6,14 @@
 cd yourbuilddir
 git clone https://github.com/M64GitHub/libtsprites.git
 git clone https://github.com/M64GitHub/plasmaghost.git
-cd tsdemo
+cd plasmaghost
 make
 ```
 
 ## RUN
 
 ```bash
-./tsdemo
+./plasmaghost
 ```
 
 ## CONTROL
