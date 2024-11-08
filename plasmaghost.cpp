@@ -128,7 +128,8 @@ int main(int argc, char **argv) {
   TSprite SprScrollText2;
   TSprite SprGhost1;
 
-  SprGhost1.ImportFromPNGFile((char *)"resources/ghostleftright.png");
+  if (SprGhost1.ImportFromPNGFile((char *)"resources/ghostleftright.png"))
+    return 1;
   SprGhost1.VSplitFixedW(SprGhost1.fs.frames[0], 18);
   render_surface_copy(SprGhost1.fs.frames[1]->out_surface,
                       SprGhost1.out_surface);
@@ -143,11 +144,16 @@ int main(int argc, char **argv) {
 
   // charset->VSplitFixedW(charset->fs.frames[0], slicewidth);
 
-  SprM64.ImportFromPNGFile((char *)"resources/m64logo_pl-010101.png");
-  SprM642.ImportFromPNGFile((char *)"resources/m64logo_tr-010203.png");
-  SprPlasma.ImportFromPNGFile((char *)"resources/100x52.png");
-  SprScrollText1.ImportFromPNGFile((char *)"resources/mainscroll.png");
-  SprScrollText2.ImportFromPNGFile((char *)"resources/subscroll.png");
+  if (SprM64.ImportFromPNGFile((char *)"resources/m64logo_pl-010101.png"))
+    return 1;
+  if (SprM642.ImportFromPNGFile((char *)"resources/m64logo_tr-010203.png"))
+    return 1;
+  if (SprPlasma.ImportFromPNGFile((char *)"resources/100x52.png"))
+    return 1;
+  if (SprScrollText1.ImportFromPNGFile((char *)"resources/mainscroll.png"))
+    return 1;
+  if (SprScrollText2.ImportFromPNGFile((char *)"resources/subscroll.png"))
+    return 1;
 
   // SprPlasma.SetXY(20, 26); // 80x40
   RenderSurface_t backup_surface;
