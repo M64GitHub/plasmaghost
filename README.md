@@ -1,5 +1,10 @@
 # PLASMAGHOST
 I am sharing this as test- and example-code for [libtsprites](https://github.com/M64GitHub/libtsprites). It's a funny program to test your terminal speed ;)
+
+
+https://github.com/user-attachments/assets/303a5164-0719-4e7d-8466-a5b553ef2583
+
+
 ## BUILD
 
 ```bash
