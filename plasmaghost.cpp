@@ -257,6 +257,9 @@ int main(int argc, char **argv) {
   term_clear();
   term_echo(E_DISABLE);
 
+  KBCtx_t kb_ctx;
+  term_kbd_init(&kb_ctx);
+
   SprPlasma.SetXY(15, 13);
   SprPlasma.SetXY(10, 13);
   SprPlasma.SetXY(10, 3);
@@ -280,7 +283,7 @@ int main(int argc, char **argv) {
       SSpr_direction.frame_idx = 0;
     }
 
-    term_nonblock(NB_ENABLE);
+    term_nonblock(NB_ENABLE, &kb_ctx);
     if (term_kbhit()) {
       KEY = term_readkey();
       // printf("-- KEYs: %08x\n", KEY);
@@ -359,7 +362,7 @@ int main(int argc, char **argv) {
       }
       sprintf(SSpr_XY_txtbuf, "[ X: %d, Y: %d ]", SprM64.x, SprM64.y);
     }
-    term_nonblock(NB_DISABLE);
+    term_nonblock(NB_DISABLE, &kb_ctx);
 
     // -- ctrl-c handler, play music, wait 4 end of frame --
     if (SDL_PollEvent(&event)) {
@@ -461,8 +464,6 @@ int main(int argc, char **argv) {
   DP.stop();
   audioThread.join();
 
-
-  term_nonblock(NB_DISABLE);
   term_echo(E_ENABLE);
   cursor_on();
   term_close();
