@@ -9,6 +9,7 @@ git clone https://github.com/M64GitHub/plasmaghost.git
 cd plasmaghost
 make
 ```
+Please note, this is test code, I use this setup while working on libtsprites and test code simultaneously. You can skip building / "installing" a shared lib this way.
 
 ## RUN
 
