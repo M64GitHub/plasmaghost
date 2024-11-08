@@ -240,7 +240,7 @@ int main(int argc, char **argv) {
 
   float time_x = 10 * 12;
 
-  // NOTE: -- CHAPTER 0 -------------------------------------- ------- --------
+  // NOTE: -- CHAPTER 0 ---------------------------------- MAIN LOOP INIT ------
 
   CHAPTER = 0;
   DP.setDmp(siddmp, siddmp_len);
@@ -264,7 +264,7 @@ int main(int argc, char **argv) {
   SprScrollText2.SetXY(Screen.Width() + 1200, 48);
   render_surface_copy(SprPlasma.out_surface, &backup_surface);
 
-  // NOTE: -- CHAPTER 0 -------------------------------------- ------- --------
+  // NOTE: -- CHAPTER 0 ---------------------------------- MAIL LOOP -----------
 
   while ((CHAPTER == 0) && (!stop)) {
     fps_begin_frame(&ctx);
@@ -456,10 +456,11 @@ int main(int argc, char **argv) {
             ctx.overruns, ctx.min, ctx.max, ctx.ts2 - ctx.ts1);
   }
 
+  // NOTE: -----------------------------------------------------------   END   -
+
   DP.stop();
   audioThread.join();
 
-  // NOTE: -----------------------------------------------------------   END   -
 
   term_nonblock(NB_DISABLE);
   term_echo(E_ENABLE);
