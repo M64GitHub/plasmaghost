@@ -47,6 +47,9 @@ $(BINARY): plasmaghost.o \
 	resid/wave8580__ST.o
 	$(CXX) -o $@ $^ $(CXXFLAGS)
 
+release:
+	linuxdeploy-x86_64.AppImage --appdir=AppDir --output appimage
+
 clean:
 	$(RM) *.o resid/*.o $(BINARY) ../libtsprites/src/*.o
 
