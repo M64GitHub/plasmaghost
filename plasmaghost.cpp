@@ -65,14 +65,10 @@ int main(int argc, char **argv) {
   Scene_t scene1;
   Scene_t scene2;
   Scene_t scene3;
-  Scene_t scene4;
-  Scene_t scene5;
 
   scene_init(&scene1, 1, scene_seconds_to_ticks(3.0, FPS));
   scene2 = scene_then(&scene1, scene_seconds_to_ticks(8.0, FPS));
   scene3 = scene_then(&scene2, scene_seconds_to_ticks(8.0, FPS));
-  scene4 = scene_then(&scene3, scene_seconds_to_ticks(2.0, FPS));
-  scene5 = scene_then(&scene4, scene_seconds_to_ticks(2.0, FPS));
 
   int stop = 0;
   SDL_Event event;
