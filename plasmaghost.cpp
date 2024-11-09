@@ -21,28 +21,6 @@
 #define FPS 60
 #define KDEBOUNCE_TICKS 8
 
-//  NOTE: -- GENERAL HELPERS ---------------------------------------------------
-
-double ease_in(int tick, int tick_maximum, double y_max) {
-  double t = (double)tick / (double)tick_maximum;
-  if (t > 1.0) {
-    t = 1.0;
-  }
-  return t * t * y_max;
-}
-
-double ease_in_out(int tick, int tick_maximum, double y_max) {
-  double t = (double)tick / (double)tick_maximum;
-  if (t > 1.0) {
-    t = 1.0;
-  }
-  if (t < 0.5) {
-    return 2 * t * t * y_max;
-  } else {
-    return (1 - 2 * (1 - t) * (1 - t)) * y_max;
-  }
-}
-
 //  NOTE: -- PLASMA GHOST ------------------------------------------------------
 
 typedef enum GhostDirection_e {
@@ -346,12 +324,22 @@ int main(int argc, char **argv) {
         SprGhost1.x = SprGhost1.out_surface->x;
         SSpr_direction.frame_idx = 4;
         KDEBOUNCE_CTR = KDEBOUNCE_TICKS;
+        if (PlasmaGhost.direction != Ghost_Left) {
+          PlasmaGhost.direction = Ghost_Left;
+          SprGhost1.StopAnimation();
+          SprGhost1.StartAnimation(Ghost_Left);
+        }
         break;
       case 'l':
         SprGhost1.out_surface->x = SprGhost1.out_surface->x + 1;
         SprGhost1.x = SprGhost1.out_surface->x;
         SSpr_direction.frame_idx = 2;
         KDEBOUNCE_CTR = KDEBOUNCE_TICKS;
+        if (PlasmaGhost.direction != Ghost_Right) {
+          PlasmaGhost.direction = Ghost_Right;
+          SprGhost1.StopAnimation();
+          SprGhost1.StartAnimation(Ghost_Right);
+        }
         break;
       case 'r':
         ctx.min = 9999999999;
@@ -398,7 +386,7 @@ int main(int argc, char **argv) {
       render_surface_copy(&backup_surface, SprPlasma.out_surface);
       tsfx_plasma_generate_plasma(&plasma2_ctx, SprPlasma.out_surface);
       tsfx_dim_direct(SprPlasma.out_surface, TICK, scene1.duration);
-      SprGhost1.SetXY(40, 100 - ease_in_out(TICK * 2, scene1.duration, 70));
+      SprGhost1.SetXY(40, 100 - ts_ease_in_out(TICK * 2, scene1.duration, 70));
     }
 
     //  NOTE: -- scene2 --
