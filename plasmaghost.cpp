@@ -12,8 +12,13 @@
 #include "resid.h"
 #include "resources/zoom64-2.sid_dmp.h"
 #include "sdl-audio.h"
+#ifdef __APPLE__
+#include <SDL.h>
+#include <SDL_events.h>
+#else
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_events.h>
+#endif
 #include <stdio.h>
 #include <thread>
 #include <unistd.h>
