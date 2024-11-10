@@ -23,6 +23,7 @@ Build via
 make release
 ```
 This will create `Plasma_Ghost-x86_64.AppImage`.  
+
 Note: the AppImage is created using the tool `linuxdeploy`. You can install it like this:
 ```
 wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
