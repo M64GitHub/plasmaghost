@@ -107,8 +107,56 @@ int main(int argc, char **argv) {
   TSprite SprScrollText2;
   TSprite SprGhost1;
 
+#ifdef APP_RELEASE
+#pragma message("APP_RELEASE is defined")
+  const char *appdir = getenv("APPDIR");
+  char filepath[2048];
+  char filename[2048];
+  if (!appdir) {
+    fprintf(stderr, "APPDIR environment variable is not set.\n");
+    return 1;
+  }
+  snprintf(filepath, sizeof(filepath), "%s/resources", appdir);
+
+  snprintf(filename, sizeof(filename), "%s/ghostleftright.png", filepath);
+  if (SprGhost1.ImportFromPNGFile(filename))
+    return 1;
+
+  snprintf(filename, sizeof(filename), "%s/m64logo_pl-010101.png", filepath);
+  if (SprM64.ImportFromPNGFile(filename))
+    return 1;
+
+  snprintf(filename, sizeof(filename), "%s/m64logo_tr-010203.png", filepath);
+  if (SprM642.ImportFromPNGFile(filename))
+    return 1;
+
+  snprintf(filename, sizeof(filename), "%s/100x52.png", filepath);
+  if (SprPlasma.ImportFromPNGFile(filename))
+    return 1;
+
+  snprintf(filename, sizeof(filename), "%s/mainscroll.png", filepath);
+  if (SprScrollText1.ImportFromPNGFile(filename))
+    return 1;
+
+  snprintf(filename, sizeof(filename), "%s/subscroll.png", filepath);
+  if (SprScrollText2.ImportFromPNGFile(filename))
+    return 1;
+#else
+#pragma message("APP_RELEASE is NOT defined")
   if (SprGhost1.ImportFromPNGFile((char *)"resources/ghostleftright.png"))
     return 1;
+  if (SprM64.ImportFromPNGFile((char *)"resources/m64logo_pl-010101.png"))
+    return 1;
+  if (SprM642.ImportFromPNGFile((char *)"resources/m64logo_tr-010203.png"))
+    return 1;
+  if (SprPlasma.ImportFromPNGFile((char *)"resources/100x52.png"))
+    return 1;
+  if (SprScrollText1.ImportFromPNGFile((char *)"resources/mainscroll.png"))
+    return 1;
+  if (SprScrollText2.ImportFromPNGFile((char *)"resources/subscroll.png"))
+    return 1;
+#endif // APP_RELEASE
+
   SprGhost1.VSplitFixedW(SprGhost1.fs.frames[0], 18);
   render_surface_copy(SprGhost1.fs.frames[1]->out_surface,
                       SprGhost1.out_surface);
@@ -120,19 +168,6 @@ int main(int argc, char **argv) {
   ghost_ani_right->tick_divider = 4;
   SprGhost1.StartAnimation(Ghost_Right);
   PlasmaGhost.direction = Ghost_Right;
-
-  // charset->VSplitFixedW(charset->fs.frames[0], slicewidth);
-
-  if (SprM64.ImportFromPNGFile((char *)"resources/m64logo_pl-010101.png"))
-    return 1;
-  if (SprM642.ImportFromPNGFile((char *)"resources/m64logo_tr-010203.png"))
-    return 1;
-  if (SprPlasma.ImportFromPNGFile((char *)"resources/100x52.png"))
-    return 1;
-  if (SprScrollText1.ImportFromPNGFile((char *)"resources/mainscroll.png"))
-    return 1;
-  if (SprScrollText2.ImportFromPNGFile((char *)"resources/subscroll.png"))
-    return 1;
 
   // SprPlasma.SetXY(20, 26); // 80x40
   RenderSurface_t backup_surface;

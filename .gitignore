@@ -2,4 +2,5 @@
 plasmaghost
 AppDir
 *.AppImage
+*.app
 .ccls-cache
