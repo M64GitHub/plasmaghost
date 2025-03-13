@@ -28,7 +28,7 @@
 
 //  NOTE: -- PLASMA GHOST ------------------------------------------------------
 
-typedef enum GhostDirection_e {
+  typedef enum GhostDirection_e {
   Ghost_Left = 0,
   Ghost_Right = 1
 } GhostDirection_t;
